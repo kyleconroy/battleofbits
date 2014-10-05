@@ -7,7 +7,7 @@ import (
 	"github.com/kyleconroy/battleofbits/games"
 )
 
-type Piece int
+type Piece int8
 type Board [9]Piece
 
 const (
