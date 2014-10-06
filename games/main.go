@@ -1,5 +1,12 @@
 package games
 
+type Game string
+
+const (
+	TicTacToe Game = "tictactoe"
+	FourUp    Game = "fourup"
+)
+
 type Match interface {
 	Tick() error
 	Over() bool

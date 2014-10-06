@@ -6,14 +6,15 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 )
 
-func FetchMove(url string, payload, move interface{}) error {
+func FetchMove(url *url.URL, payload, move interface{}) error {
 	blob, err := json.MarshalIndent(payload, "", "  ")
 	if err != nil {
 		return err
 	}
-	resp, err := http.Post(url, "application/json", bytes.NewReader(blob))
+	resp, err := http.Post(url.String(), "application/json", bytes.NewReader(blob))
 	if err != nil {
 		return err
 	}

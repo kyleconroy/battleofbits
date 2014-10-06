@@ -3,6 +3,7 @@ package tictactoe
 import (
 	"fmt"
 	"math/rand"
+	"net/url"
 
 	"github.com/kyleconroy/battleofbits/games"
 )
@@ -46,7 +47,7 @@ type Move struct {
 // A tic-tac-toe board is represented as nine-length array of integers
 type Player struct {
 	Piece Piece
-	URL   string
+	URL   *url.URL
 }
 
 func (p Player) NextMove(pc Piece, board Board) (int, error) {
@@ -151,18 +152,11 @@ func (m Match) Over() bool {
 	return false
 }
 
-func NewPlayer(piece Piece, u string) Player {
-	return Player{
-		Piece: piece,
-		URL:   u,
-	}
-}
-
-func NewMatch(one, two string) Match {
+func NewMatch(one, two *url.URL) Match {
 	return Match{
 		Board:     Board{},
-		PlayerOne: NewPlayer(X, one),
-		PlayerTwo: NewPlayer(O, two),
+		PlayerOne: Player{Piece: X, URL: one},
+		PlayerTwo: Player{Piece: O, URL: two},
 		Current:   X,
 	}
 }
